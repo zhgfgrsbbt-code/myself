@@ -1,0 +1,1068 @@
+<!DOCTYPE1 html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人天賦潛能與職涯發展地圖 | 穩定型整合者</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for interactive state -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tech: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            blue: '#3b82f6',
+                            indigo: '#6366f1',
+                            emerald: '#10b981',
+                            amber: '#f59e0b',
+                            rose: '#f43f5e'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.04)',
+                        'glass-hover': '0 12px 40px 0 rgba(31, 38, 135, 0.08)',
+                        'glow': '0 0 20px rgba(99, 102, 241, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.5) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(243, 232, 255, 0.3) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(238, 242, 255, 0.6) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .glass-card-subtle {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #4338ca 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-accent {
+            background: linear-gradient(135deg, #4f46e5 0%, #0284c7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body x-data="talentApp()" class="min-h-screen flex flex-col justify-between selection:bg-indigo-100 selection:text-indigo-900">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 glass-card border-b border-slate-200/60 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center text-white shadow-md shadow-indigo-200">
+                    <i class="fa-solid fa-compass text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-slate-800 tracking-tight text-base sm:text-lg">天賦發展全景圖</span>
+                    <span class="hidden sm:inline-block text-xs bg-indigo-50 text-indigo-600 px-2.5 py-0.5 rounded-full font-medium ml-2 border border-indigo-100">Stability Integrator</span>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-600">
+                <a href="#core-insight" class="hover:text-indigo-600 transition-colors">核心痛點覺察</a>
+                <a href="#talent-profile" class="hover:text-indigo-600 transition-colors">天賦組合</a>
+                <a href="#ikigai-section" class="hover:text-indigo-600 transition-colors">刺蝟原則與使命</a>
+                <a href="#future-trends" class="hover:text-indigo-600 transition-colors">30年趨勢與6大產業</a>
+                <a href="#capability-pyramid" class="hover:text-indigo-600 transition-colors">能力金字塔與5大路徑</a>
+                <a href="#esbi-roadmap" class="hover:text-indigo-600 transition-colors">ESBI 轉型路徑</a>
+                <a href="#assessment-compass" class="hover:text-indigo-600 transition-colors">選擇指標指南</a>
+            </nav>
+
+            <div class="flex items-center space-x-2">
+                <button @click="printSummary()" class="px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 hover:text-indigo-600 bg-white/80 hover:bg-white rounded-lg border border-slate-200 shadow-sm transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-print"></i>
+                    <span>導出報告</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-10 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-glass relative overflow-hidden border border-white">
+            <div class="absolute -right-16 -top-16 w-64 h-64 bg-indigo-100/50 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-blue-100/50 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100/80 border border-slate-200 text-slate-700 text-xs font-semibold uppercase tracking-wider mb-4">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    個人天賦與潛能定位檔案
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+                    你不是不會管理，你是<br class="hidden sm:inline"/>
+                    <span class="text-gradient">「穩定型整合者」</span>
+                </h1>
+
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed mb-6">
+                    建立一個讓人安心、能成長、能穩定運作的環境。這不僅是你的專業技能，更是你發自內心的核心使命與價值所在。
+                </p>
+
+                <!-- Core Quote Card Banner -->
+                <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-900 to-indigo-950 text-white shadow-lg relative">
+                    <div class="text-amber-400 text-xs font-semibold tracking-wider uppercase mb-1">
+                        <i class="fa-solid fa-quote-left mr-1"></i> 終極覺察金句
+                    </div>
+                    <blockquote class="text-base sm:text-lg font-medium tracking-wide">
+                        「你累的，不是工作量，而是『責任與認可失衡』。」
+                    </blockquote>
+                    <p class="text-xs sm:text-sm text-slate-300 mt-2 font-light">
+                        因為你把事情做好後，問題消失了；人們習慣注意到「問題」，卻忘了「是誰讓問題沒發生」。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick Stats / Highlights Grid -->
+            <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-6 border-t border-slate-200/60">
+                <div class="p-3.5 rounded-xl bg-white/60 border border-slate-100">
+                    <div class="text-xs font-medium text-slate-500">未來30年核心定位</div>
+                    <div class="text-base font-bold text-indigo-600 mt-0.5">人與流程成長整合者</div>
+                </div>
+                <div class="p-3.5 rounded-xl bg-white/60 border border-slate-100">
+                    <div class="text-xs font-medium text-slate-500">核心能力方程式</div>
+                    <div class="text-base font-bold text-slate-800 mt-0.5">人 × 成長 × 信任 × 系統</div>
+                </div>
+                <div class="p-3.5 rounded-xl bg-white/60 border border-slate-100">
+                    <div class="text-xs font-medium text-slate-500">職涯建議路徑</div>
+                    <div class="text-base font-bold text-slate-800 mt-0.5">E → E+I → E+B → I</div>
+                </div>
+                <div class="p-3.5 rounded-xl bg-white/60 border border-slate-100">
+                    <div class="text-xs font-medium text-slate-500">最高適配產業</div>
+                    <div class="text-base font-bold text-emerald-600 mt-0.5">AI L&D / 初伴家庭服務</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: 痛點破解與本質覺察 -->
+    <section id="core-insight" class="py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">01. 消耗背後的真相：倦怠的盲點循環</h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">剖析你過去之所以感到疲憊的根本機制，並重新理解你的「界線」與「責任感」。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- The 6-Step Cycle Interactive Card -->
+            <div class="lg:col-span-7 glass-card rounded-2xl p-6 shadow-sm">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-arrows-spin text-amber-500"></i>
+                    你的典型消耗循環 6 步驟
+                </h3>
+
+                <div class="space-y-3">
+                    <template x-for="(step, index) in cycleSteps" :key="index">
+                        <div @click="activeCycleStep = index" 
+                             :class="activeCycleStep === index ? 'bg-indigo-50/90 border-indigo-200 ring-2 ring-indigo-500/20 shadow-sm' : 'bg-white/70 border-slate-100 hover:bg-white'"
+                             class="p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <span :class="activeCycleStep === index ? 'bg-indigo-600 text-white' : 'bg-slate-200 text-slate-700'"
+                                      class="w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center transition-colors">
+                                    <span x-text="index + 1"></span>
+                                </span>
+                                <div>
+                                    <div class="font-bold text-sm text-slate-800" x-text="step.title"></div>
+                                    <div class="text-xs text-slate-500" x-text="step.quote"></div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-400" :class="{'rotate-90 text-indigo-600': activeCycleStep === index}"></i>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Step Detail Box -->
+                <div class="mt-4 p-4 rounded-xl bg-slate-900 text-slate-100 text-xs sm:text-sm leading-relaxed">
+                    <div class="font-semibold text-indigo-300 mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        解讀與破局建議：
+                    </div>
+                    <div x-text="cycleSteps[activeCycleStep].detail"></div>
+                </div>
+            </div>
+
+            <!-- Invisible Value & Boundary Clarification -->
+            <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+                <!-- Invisible Value Card -->
+                <div class="glass-card rounded-2xl p-6 shadow-sm border-l-4 border-l-amber-500">
+                    <h4 class="font-bold text-slate-800 text-base mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-eye-slash text-amber-500"></i>
+                        「看不見」的價值困境
+                    </h4>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                        很多人希望別人記得他：「有她在就很安心。」但這種人最容易落入困境——因為你把事情做好之後，<span class="font-bold text-slate-800 bg-amber-50 px-1">問題消失了</span>。多數人只會關注發生的危機，而忽略是誰預防了危機。
+                    </p>
+                </div>
+
+                <!-- Re-framing Rejection Card -->
+                <div class="glass-card rounded-2xl p-6 shadow-sm border-l-4 border-l-indigo-500">
+                    <h4 class="font-bold text-slate-800 text-base mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-indigo-500"></i>
+                        重新定義「學會拒絕」
+                    </h4>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3">
+                        真正的問題不是你不會拒絕，而是：<strong class="text-slate-800">「你看到事情有風險，就很難假裝沒看到。」</strong>
+                    </p>
+                    <div class="p-3 rounded-lg bg-indigo-50/60 text-indigo-900 text-xs font-medium">
+                        💡 責任感是你的天賦優勢。但若沒有健康的團隊環境與界線，它就會成為無底限補位負擔。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: 核心天賦矩陣 -->
+    <section id="talent-profile" class="py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">02. 你的核心天賦定位</h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">「穩定型整合者 (Stability Integrator)」的能力組合與價值展現。</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- 6 Capability Bullets Card -->
+            <div class="md:col-span-2 glass-card rounded-2xl p-6 shadow-sm">
+                <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-cubes-stacked text-indigo-600"></i>
+                    能力組合：不只是技術，更是綜合串聯力
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="p-3 rounded-xl bg-white/80 border border-slate-100 flex items-start gap-3">
+                        <i class="fa-solid fa-bolt text-indigo-500 mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-xs text-slate-800">快速理解現況</div>
+                            <div class="text-xs text-slate-500 mt-0.5">能迅即評估混亂局面並釐清重點。</div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-white/80 border border-slate-100 flex items-start gap-3">
+                        <i class="fa-solid fa-magnifying-glass text-indigo-500 mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-xs text-slate-800">觀察細節與風險</div>
+                            <div class="text-xs text-slate-500 mt-0.5">具備預防潛在問題發生敏銳嗅覺。</div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-white/80 border border-slate-100 flex items-start gap-3">
+                        <i class="fa-solid fa-puzzle-piece text-indigo-500 mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-xs text-slate-800">主動補足能力</div>
+                            <div class="text-xs text-slate-500 mt-0.5">遇到缺口願快速自主學習補上缺漏。</div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-white/80 border border-slate-100 flex items-start gap-3">
+                        <i class="fa-solid fa-network-wired text-indigo-500 mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-xs text-slate-800">整合人與資訊</div>
+                            <div class="text-xs text-slate-500 mt-0.5">將分散點狀數據與意見凝聚成系統。</div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-white/80 border border-slate-100 flex items-start gap-3">
+                        <i class="fa-solid fa-anchor text-indigo-500 mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-xs text-slate-800">高壓下維持穩定</div>
+                            <div class="text-xs text-slate-500 mt-0.5">在混亂中扮演定海神針鎮定人心。</div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-white/80 border border-slate-100 flex items-start gap-3">
+                        <i class="fa-solid fa-heart-circle-check text-indigo-500 mt-1"></i>
+                        <div>
+                            <div class="font-semibold text-xs text-slate-800">讓人感到安心</div>
+                            <div class="text-xs text-slate-500 mt-0.5">無形中創造值得信任安全合作氛圍。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RAC Code & Care Profile -->
+            <div class="glass-card rounded-2xl p-6 shadow-sm flex flex-col justify-between bg-gradient-to-br from-white to-indigo-50/30">
+                <div>
+                    <div class="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-1">理論對應</div>
+                    <h3 class="font-bold text-slate-800 text-lg mb-3">何倫碼 (RAC) + 關懷人</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+                        <strong>R (實作)</strong> 務實解決問題<br>
+                        <strong>A (分析)</strong> 拆解現況漏洞<br>
+                        <strong>C (常規)</strong> 建立運作秩序<br>
+                        <span class="text-indigo-600 font-semibold">+ 對人的關心與培育心態</span>
+                    </p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-white border border-indigo-100 text-xs text-slate-700">
+                    <strong>對托育/教育被吸引的本質：</strong><br>
+                    深層原因不是「只喜歡小孩」，而是「希望成為讓人成長、安心的人」。
+                </div>
+            </div>
+        </div>
+
+        <!-- Mindset Comparison Card: Hero vs. Cultivator -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm">
+            <h3 class="font-bold text-slate-800 text-lg mb-2">你的成就感模式：培育型 vs 英雄型</h3>
+            <p class="text-xs sm:text-sm text-slate-500 mb-6">「少了一個螺絲，機器不會無法運行，因為還會有替補螺絲。」這代表你並非追求個人不可取代，而是專注使他人成長。</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Hero Type (Not You) -->
+                <div class="p-5 rounded-xl bg-slate-100/70 border border-slate-200 opacity-80">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-bold text-slate-700 text-sm">英雄型 (Hero Mindset)</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-slate-200 text-slate-600 font-mono">追求個人不可替代</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        成就感來源：「沒有我，公司或團隊就不行。」習慣獨攬大權，所有人必須依賴自己的指令與存在。
+                    </p>
+                    <div class="text-xs text-slate-500 italic">× 這不是你的核心動機，這會讓你快速燃燒疲憊。</div>
+                </div>
+
+                <!-- Cultivator Type (YOU) -->
+                <div class="p-5 rounded-xl bg-gradient-to-br from-indigo-50 to-emerald-50/50 border border-indigo-200 ring-1 ring-indigo-500/20">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-bold text-indigo-900 text-sm">培育型 (Cultivator Mindset) ✓</span>
+                        <span class="text-xs px-2 py-0.5 rounded bg-indigo-100 text-indigo-700 font-medium">賦能並建立穩定系統</span>
+                    </div>
+                    <p class="text-xs text-indigo-950 leading-relaxed mb-3">
+                        成就感來源：<strong>「因為我，別人變得有能力；即使沒有我，他們也能做得很好。」</strong>
+                    </p>
+                    <div class="text-xs text-indigo-700 font-semibold">✓ 你的真正天賦：讓人成長、建立即使不在場也能穩定運作的環境。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: 刺蝟原則與使命 (Ikigai) -->
+    <section id="ikigai-section" class="py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">03. 刺蝟原則與人生使命 (Ikigai)</h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">三個圓圈交集的定位與核心導向。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Circle 1: Passion -->
+            <div class="glass-card rounded-2xl p-6 shadow-sm border-t-4 border-t-rose-500">
+                <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-heart text-lg"></i>
+                </div>
+                <h3 class="font-bold text-slate-800 text-base mb-2">① 你真正熱愛的是什麼？</h3>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    建立一個讓人安心、願意成長、事情能順利運作的環境。你享受的是：<strong class="text-slate-800">努力帶來了可持續的真實改善。</strong>
+                </p>
+            </div>
+
+            <!-- Circle 2: Strengths -->
+            <div class="glass-card rounded-2xl p-6 shadow-sm border-t-4 border-t-indigo-500">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                </div>
+                <h3 class="font-bold text-slate-800 text-base mb-2">② 你最有潛力做到優秀的？</h3>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    把<strong class="text-slate-800">「人」與「流程」串聯起來</strong>的能力組合（傾聽、建立信任、協調、流程規劃、危機應變與持續改善）。
+                </p>
+            </div>
+
+            <!-- Circle 3: Market Need -->
+            <div class="glass-card rounded-2xl p-6 shadow-sm border-t-4 border-t-emerald-500">
+                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-coins text-lg"></i>
+                </div>
+                <h3 class="font-bold text-slate-800 text-base mb-2">③ 市場願意為什麼付費？</h3>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    市場為這件事買單：<strong class="text-slate-800">讓團隊運作更有效率，同時讓人願意留下來。</strong>（培訓、托育運作、專案營運、客戶成功）。
+                </p>
+            </div>
+        </div>
+
+        <!-- Ikigai Mission Statement Box -->
+        <div class="glass-card rounded-3xl p-8 shadow-glass bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white relative overflow-hidden">
+            <div class="absolute right-0 top-0 bottom-0 w-1/3 bg-indigo-500/10 blur-3xl"></div>
+            
+            <div class="relative z-10 max-w-3xl">
+                <div class="text-indigo-400 font-semibold text-xs tracking-widest uppercase mb-2">專屬你的人生使命宣言 (Ikigai)</div>
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-extrabold leading-snug tracking-tight mb-4 text-white">
+                    「我希望透過傾聽、協調與建立秩序，讓人安心成長，也讓團隊持續變得更好。」
+                </h3>
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                    未來無論履歷自我介紹、創業願景或個人品牌設定，這句話都是最貼切你靈魂的核心底色。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: 30年趨勢與未來6大產業方向 -->
+    <section id="future-trends" class="py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="mb-8">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-semibold uppercase tracking-wider mb-2">
+                <i class="fa-solid fa-earth-asia"></i> 跨越 30 年的產業變遷格局
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">04. 未來 30 年三大確定趨勢與 6 大產業方向</h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">不預測單一職業，而是尋找能跨越產業變化的「不可替代能力組合」。</p>
+        </div>
+
+        <!-- 3 Macro Trends Banner Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="glass-card rounded-2xl p-5 border-l-4 border-l-amber-500">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-amber-600 uppercase">趨勢 ① 人口結構變化</span>
+                    <span class="text-[10px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-mono">國發會數據</span>
+                </div>
+                <h4 class="font-bold text-slate-800 text-sm mb-1">少子化與高齡化衝擊</h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    台灣2070年人口估降至1,497萬，65歲以上佔比達46.5%。核心需求轉向：<strong>照顧人、培養人、提升單人生產力與全齡職涯轉型</strong>。
+                </p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 border-l-4 border-l-blue-500">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-blue-600 uppercase">趨勢 ② AI 與自動化</span>
+                    <span class="text-[10px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-mono">WEF & OECD</span>
+                </div>
+                <h4 class="font-bold text-slate-800 text-sm mb-1">人機協同與AI工具化</h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    2030年將產生1.7億新工作、替代9,200萬舊工作。關鍵不再是「AI是否取代人」，而是<strong>「誰能善用AI放大自身溝通與營運價值」</strong>。
+                </p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-5 border-l-4 border-l-emerald-500">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-emerald-600 uppercase">趨勢 ③ 學習典範轉移</span>
+                    <span class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-mono">UNESCO</span>
+                </div>
+                <h4 class="font-bold text-slate-800 text-sm mb-1">從教知識到協助成長</h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    AI普及使單純知識傳遞貶值。未來最稀缺的是：<strong>學習動機激發、情緒支持、信任建立與學習系統設計</strong>。
+                </p>
+            </div>
+        </div>
+
+        <!-- 6 Major Industry Directions Interactive Tabs/Grid -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm">
+            <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-compass-drafting text-indigo-600"></i>
+                未來 6 大潛力產業適配度分析
+            </h3>
+
+            <!-- Industry selector tabs -->
+            <div class="flex flex-wrap gap-2 mb-6 border-b border-slate-200 pb-4">
+                <template x-for="(ind, key) in futureIndustries" :key="key">
+                    <button @click="activeIndustry = key"
+                            :class="activeIndustry === key ? 'bg-indigo-600 text-white shadow' : 'bg-white text-slate-700 hover:bg-slate-100'"
+                            class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 border border-slate-200">
+                        <span x-text="ind.name"></span>
+                        <span :class="activeIndustry === key ? 'text-amber-300' : 'text-amber-500'" class="text-xs" x-text="ind.stars"></span>
+                    </button>
+                </template>
+            </div>
+
+            <!-- Active Industry Card Details -->
+            <div class="bg-white/80 rounded-2xl p-6 border border-slate-100 relative">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest" x-text="'方向 0' + (Object.keys(futureIndustries).indexOf(activeIndustry) + 1)"></span>
+                        <h4 class="text-xl font-extrabold text-slate-900" x-text="futureIndustries[activeIndustry].title"></h4>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-500">適配度：</span>
+                        <span class="text-amber-500 font-bold tracking-widest" x-text="futureIndustries[activeIndustry].stars"></span>
+                    </div>
+                </div>
+
+                <p class="text-slate-600 text-sm leading-relaxed mb-6" x-text="futureIndustries[activeIndustry].why"></p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Traditional Roles -->
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="text-xs font-bold text-slate-500 mb-2 flex items-center gap-1">
+                            <i class="fa-solid fa-briefcase"></i> 現有 / 傳統職位
+                        </div>
+                        <ul class="space-y-1 text-xs text-slate-700">
+                            <template x-for="r in futureIndustries[activeIndustry].currentRoles" :key="r">
+                                <li class="flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                    <span x-text="r"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+
+                    <!-- Future / Emerging Roles -->
+                    <div class="p-4 rounded-xl bg-indigo-50/60 border border-indigo-100">
+                        <div class="text-xs font-bold text-indigo-700 mb-2 flex items-center gap-1">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> AI時代新興職位 (高價值)
+                        </div>
+                        <ul class="space-y-1 text-xs text-indigo-900 font-medium">
+                            <template x-for="r in futureIndustries[activeIndustry].emergingRoles" :key="r">
+                                <li class="flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                                    <span x-text="r"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-3 rounded-xl bg-emerald-50 border border-emerald-100 text-xs text-emerald-900 font-medium flex items-start gap-2">
+                    <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                    <div>
+                        <strong>天賦契合重點：</strong> <span x-text="futureIndustries[activeIndustry].fitNote"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: 未來能力金字塔與 5 大優先轉向路徑 -->
+    <section id="capability-pyramid" class="py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">05. 未來 30 年能力金字塔與 5 大優先發展路線</h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">構築你的底層能力到高階價值，並選擇最適合你的落地起手式。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+            <!-- Future Capability Pyramid Visual -->
+            <div class="lg:col-span-5 glass-card rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-indigo-600"></i>
+                        你的 30 年能力金字塔
+                    </h3>
+                    <p class="text-xs text-slate-500 mb-4">層層堆疊，形成跨越產業波動的核心壁壘。</p>
+
+                    <div class="space-y-2">
+                        <!-- Layer 4: Top -->
+                        <div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-sm text-center">
+                            <div class="text-[10px] font-semibold uppercase tracking-wider text-amber-100">Level 4 · 高階價值</div>
+                            <div class="text-sm font-bold mt-0.5">讓人與組織適應變化、持續成長</div>
+                        </div>
+
+                        <!-- Layer 3 -->
+                        <div class="p-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-sm text-center">
+                            <div class="text-[10px] font-semibold uppercase tracking-wider text-indigo-200">Level 3 · 未來能力</div>
+                            <div class="text-sm font-bold mt-0.5">AI工具 × 數據判斷 × 變革管理</div>
+                        </div>
+
+                        <!-- Layer 2 -->
+                        <div class="p-3.5 rounded-xl bg-gradient-to-r from-slate-700 to-slate-800 text-white shadow-sm text-center">
+                            <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-300">Level 2 · 專業能力</div>
+                            <div class="text-sm font-bold mt-0.5">流程 × 專案 × 營運 SOP</div>
+                        </div>
+
+                        <!-- Layer 1: Base -->
+                        <div class="p-3.5 rounded-xl bg-slate-200 text-slate-800 text-center border border-slate-300">
+                            <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Level 1 · 底層天賦</div>
+                            <div class="text-sm font-bold mt-0.5">傾聽 × 信任 × 協調</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-3 rounded-xl bg-indigo-50 border border-indigo-100 text-xs text-indigo-950 font-medium">
+                    💡 <strong>核心定位總結：</strong><br>
+                    「人與流程的成長整合者 (Human-Centered Growth & Operations Integrator)」
+                </div>
+            </div>
+
+            <!-- 5 Priority Routes Accordion/Selector -->
+            <div class="lg:col-span-7 glass-card rounded-2xl p-6 shadow-sm">
+                <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-route text-indigo-600"></i>
+                    為你排序：最值得發展的 5 條實踐路線
+                </h3>
+
+                <div class="space-y-3">
+                    <template x-for="(route, idx) in priorityRoutes" :key="idx">
+                        <div @click="activeRouteIdx = idx"
+                             :class="activeRouteIdx === idx ? 'border-indigo-500 bg-indigo-50/50 ring-1 ring-indigo-500/20' : 'border-slate-200 bg-white hover:bg-slate-50'"
+                             class="p-4 rounded-xl border transition-all cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span :class="idx === 0 ? 'bg-amber-500 text-white' : 'bg-slate-200 text-slate-700'" class="w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center">
+                                        <span x-text="idx + 1"></span>
+                                    </span>
+                                    <div class="font-bold text-sm text-slate-800" x-text="route.title"></div>
+                                </div>
+                                <span class="text-xs font-semibold text-indigo-600" x-text="route.badge"></span>
+                            </div>
+
+                            <div x-show="activeRouteIdx === idx" class="mt-3 pt-3 border-t border-indigo-100/60 text-xs text-slate-600 space-y-2">
+                                <div><strong class="text-slate-800">晉升演進：</strong> <span x-text="route.path"></span></div>
+                                <div><strong class="text-slate-800">專屬角色定位：</strong> <span x-text="route.role"></span></div>
+                                <div class="p-2.5 rounded-lg bg-white border border-indigo-100 text-indigo-900 font-medium" x-text="route.summary"></div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Golden First Job Criteria Card -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm border-l-4 border-l-emerald-500 bg-gradient-to-r from-white via-emerald-50/20 to-white">
+            <h4 class="font-bold text-slate-800 text-base mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-compass text-emerald-600"></i>
+                選擇第一份工作的三大「積累檢驗標準」
+            </h4>
+            <p class="text-xs sm:text-sm text-slate-600 mb-4">不要急著問「我要不要一輩子做某產業」，而是檢視這份工作是否能同時讓你累積以下三種能力：</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="p-3.5 rounded-xl bg-white border border-emerald-100">
+                    <div class="font-bold text-xs text-emerald-800 mb-1">1. 與人工作 (People)</div>
+                    <div class="text-xs text-slate-500">持續鍛鍊傾聽、溝通、同理心與建立長遠信任感。</div>
+                </div>
+                <div class="p-3.5 rounded-xl bg-white border border-emerald-100">
+                    <div class="font-bold text-xs text-emerald-800 mb-1">2. 與系統工作 (System)</div>
+                    <div class="text-xs text-slate-500">培養流程梳理、專案推動、營運SOP與問題持續改善。</div>
+                </div>
+                <div class="p-3.5 rounded-xl bg-white border border-emerald-100">
+                    <div class="font-bold text-xs text-emerald-800 mb-1">3. 與未來工作 (Future)</div>
+                    <div class="text-xs text-slate-500">主動學習AI工具、數據分析、數位化與新型態工作流程。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: ESBI 專屬轉型藍圖 -->
+    <section id="esbi-roadmap" class="py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-100">
+                        <i class="fa-solid fa-chart-line mr-1"></i> 富爸爸 ESBI 轉型架構
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mt-2">06. 專屬你的 ESBI 資產轉型藍圖</h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-1">不走傳統硬碰硬創業，而是運用漸進式路徑：<strong class="text-indigo-600">E → E＋I → E＋S/E＋B → B＋I → I</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive ESBI Navigation Cards -->
+        <div class="glass-card rounded-2xl p-6 shadow-sm mb-6">
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-6">
+                <template x-for="(stage, key) in esbiStages" :key="key">
+                    <button @click="activeEsbiTab = key"
+                            :class="activeEsbiTab === key ? 'bg-slate-900 text-white shadow-md ring-2 ring-indigo-500' : 'bg-white/80 text-slate-700 hover:bg-slate-100 border border-slate-200'"
+                            class="p-3 rounded-xl text-left transition-all relative overflow-hidden">
+                        <div class="text-[10px] font-bold uppercase tracking-wider text-amber-400" x-text="stage.phase"></div>
+                        <div class="font-extrabold text-sm sm:text-base" x-text="stage.tabTitle"></div>
+                    </button>
+                </template>
+            </div>
+
+            <!-- Active Stage Card Details -->
+            <div class="bg-white/90 rounded-2xl p-6 border border-slate-200/80">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 mb-4 gap-2">
+                    <div>
+                        <div class="text-xs font-bold text-indigo-600" x-text="esbiStages[activeEsbiTab].timeframe"></div>
+                        <h3 class="text-xl font-bold text-slate-900" x-text="esbiStages[activeEsbiTab].title"></h3>
+                    </div>
+                    <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-semibold border border-indigo-100" x-text="esbiStages[activeEsbiTab].focus"></span>
+                </div>
+
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5" x-text="esbiStages[activeEsbiTab].desc"></p>
+
+                <!-- Dynamic Content Blocks for current Stage -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="text-xs font-bold text-slate-800 mb-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-list-check text-indigo-500"></i>
+                            核心行動任務與重點
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-600">
+                            <template x-for="task in esbiStages[activeEsbiTab].tasks" :key="task">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-500 text-[10px] mt-0.5"></i>
+                                    <span x-text="task"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-indigo-50/50 border border-indigo-100">
+                        <div class="text-xs font-bold text-indigo-900 mb-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-piggy-bank text-indigo-600"></i>
+                            關鍵資本累積 / 核心心態
+                        </div>
+                        <div class="text-xs text-indigo-950 leading-relaxed font-medium" x-text="esbiStages[activeEsbiTab].capitalFocus"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESBI Golden Strategy Banner -->
+        <div class="p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-md relative overflow-hidden">
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <div class="text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">
+                        <i class="fa-solid fa-key mr-1"></i> 專屬於你的 ESBI 終極核心策略
+                    </div>
+                    <div class="text-base sm:text-lg font-extrabold tracking-wide text-white">
+                        「先成為值得信任的人，再建立值得信任的系統，最後投資能持續創造信任與價值的資產。」
+                    </div>
+                </div>
+                <div class="shrink-0 text-xs bg-white/10 px-4 py-2.5 rounded-xl border border-white/20 text-slate-200">
+                    目標：用系統與資產換取選擇自由 🕊️
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: 職涯選擇「新度量衡」問卷 -->
+    <section id="assessment-compass" class="py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="mb-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">07. 職涯選擇「新度量衡」環境檢驗表</h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">過去你總是問：「我能否勝任這工作？」未來請拿這把尺問：<strong class="text-indigo-600">「這環境值得我投入天賦嗎？」</strong></p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Checklist interactive cards -->
+            <div class="lg:col-span-8 glass-card rounded-2xl p-6 shadow-sm">
+                <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center justify-between">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-clipboard-check text-indigo-600"></i>
+                        環境適配度 5 大標準測試
+                    </span>
+                    <span class="text-xs font-normal text-slate-500">已勾選 <strong class="text-indigo-600 text-sm" x-text="checkedCount"></strong> / 5 項</span>
+                </h3>
+
+                <div class="space-y-3">
+                    <template x-for="(item, index) in envChecklist" :key="index">
+                        <label @click="item.checked = !item.checked" 
+                               :class="item.checked ? 'bg-indigo-50/80 border-indigo-300 ring-1 ring-indigo-500/20' : 'bg-white/80 border-slate-200 hover:bg-slate-50'"
+                               class="p-4 rounded-xl border transition-all cursor-pointer flex items-start gap-3.5 select-none">
+                            <div class="mt-0.5 shrink-0">
+                                <div :class="item.checked ? 'bg-indigo-600 border-indigo-600 text-white' : 'border-slate-300 bg-white'"
+                                     class="w-5 h-5 rounded border flex items-center justify-center transition-colors">
+                                    <i class="fa-solid fa-check text-xs" x-show="item.checked"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-bold text-sm text-slate-800" x-text="item.title"></div>
+                                <div class="text-xs text-slate-500 mt-1 leading-relaxed" x-text="item.desc"></div>
+                            </div>
+                        </label>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Result callout card -->
+            <div class="lg:col-span-4 glass-card rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-gauge-high text-amber-500"></i>
+                        檢驗結果評估
+                    </h3>
+
+                    <div class="p-4 rounded-xl mb-4 transition-all"
+                         :class="{
+                             'bg-emerald-50 border border-emerald-200 text-emerald-900': checkedCount >= 4,
+                             'bg-amber-50 border border-amber-200 text-amber-900': checkedCount >= 2 && checkedCount < 4,
+                             'bg-rose-50 border border-rose-200 text-rose-900': checkedCount < 2
+                         }">
+                        <div class="font-bold text-sm mb-1" x-text="getScoreTitle()"></div>
+                        <div class="text-xs leading-relaxed" x-text="getScoreDesc()"></div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-900 text-white text-xs leading-relaxed">
+                    <div class="font-semibold text-amber-400 mb-1">💡 金句提醒：</div>
+                    「你的天賦需要健康的土壤才能生長。若環境只習慣無視問題與無底限補位，再優秀的天賦也會被燃燒怠盡。」
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-16 border-t border-slate-200/80 bg-white/60 py-8 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="font-bold text-slate-700">穩定型整合者 (Stability Integrator)</span> · 個人天賦發展全景地圖
+            </div>
+            <div>
+                以人為核心 × 整合人與流程 × 持續改善
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function talentApp() {
+            return {
+                activeCycleStep: 0,
+                activeEsbiTab: 'E',
+                activeIndustry: 'learning',
+                activeRouteIdx: 0,
+
+                // 6 Cycle steps
+                cycleSteps: [
+                    { title: '1. 發現問題', quote: '「這樣下去不行，有潛在風險。」', detail: '敏銳觀察到流程疏漏與潛在風險，是天生的預防機制。' },
+                    { title: '2. 主動補位', quote: '「沒關係，我先來處理吧。」', detail: '出於強烈責任感主動接手，避免團隊卡關或混亂。' },
+                    { title: '3. 大家依賴', quote: '「太好了，有她在就很安心。」', detail: '團隊習慣你的存在，開始把危機預防當作理所當然。' },
+                    { title: '4. 變成標準', quote: '「反正妳都會，這妳順便做。」', detail: '額外的付出與補位被認定為你的常態工作職責。' },
+                    { title: '5. 忽視貢獻', quote: '「這本來就是妳的工作吧？」', detail: '因為問題被你消滅了，大家只看到順利，看不到背後的預防。' },
+                    { title: '6. 開始疲憊', quote: '「為什麼我做這麼多，卻責任與認可失衡？」', detail: '累積大量責任卻缺乏相應資源與正向認可，引發深刻倦怠。' }
+                ],
+
+                // ESBI Stages data
+                esbiStages: {
+                    'E': {
+                        phase: 'Stage 1',
+                        tabTitle: 'E 職場精英',
+                        timeframe: '0～1、3年',
+                        title: '第一階段：E｜成為高價值跳板型員工',
+                        focus: '累積四類核心資本',
+                        desc: '選能接觸人、解決問題、改善流程的跳板型工作，不要急著創業，先在健康組織中鍛鍊戰力。',
+                        capitalFocus: '專注累積 4 大資本：1.人力資本(專業技能) 2.信任資本(口碑人脈) 3.系統資本(SOP流程) 4.金融資本(預備金與投資款)',
+                        tasks: [
+                            '刻意記錄個人解決的問題與改善的流程結果',
+                            '建立緊急預備金（6個月生活費）',
+                            '開始固定比率的投資紀律',
+                            '確認一個想深入發揮天賦的產業領域'
+                        ]
+                    },
+                    'EI': {
+                        phase: 'Stage 2',
+                        tabTitle: 'E＋I 資產養成',
+                        timeframe: '工作穩定後',
+                        title: '第二階段：E＋I｜薪水轉化為長期資產',
+                        focus: '建立固定投資紀律',
+                        desc: '「薪水不是終點，薪水是購買資產的燃料。」不求短期暴利，運用長期持續改善的精神配置金融資產。',
+                        capitalFocus: '建立現金流分配架構：生活費 → 緊急預備金 → 長期投資資金 → 自我成長資金。以指數化/優質資產為主。',
+                        tasks: [
+                            '打造自動化投資扣款機制',
+                            '提高主業薪資與專業影響力',
+                            '打造專屬個人專業標籤：「擅長讓人與流程更好」',
+                            '參與產業社群，累積跨領域人脈'
+                        ]
+                    },
+                    'ES': {
+                        phase: 'Stage 3',
+                        tabTitle: 'E＋S 小規模驗證',
+                        timeframe: '3～5年',
+                        title: '第三階段：E＋S｜小規模驗證個人服務',
+                        focus: '低風險斜槓測試',
+                        desc: '不盲目辭職創業！把個人能力（活動、托育、培訓、流程顧問）進行小規模市場測試。',
+                        capitalFocus: '原則：「先驗證市場，再放大投入。」避免一人孤軍奮戰承擔全部營運風險。',
+                        tasks: [
+                            '嘗試小規模親子/兒童活動規劃與帶領',
+                            '設計企業內訓或服務流程優化方案',
+                            '協助小型團隊或店家梳理卡點 SOP',
+                            '驗證市場付費意願與服務體驗滿意度'
+                        ]
+                    },
+                    'EB': {
+                        phase: 'Stage 4',
+                        tabTitle: 'E＋B 系統建立',
+                        timeframe: '5～10年',
+                        title: '第四階段：E＋B｜打造可運作的系統（如：初伴）',
+                        focus: '從個人服務到系統化',
+                        desc: '從「親自解決所有問題」升級為「建立一個能解決問題的安心系統」。讓團隊與制度代為執行。',
+                        capitalFocus: '建立標準收托/服務流程、家長/客戶溝通制度、培訓與品質管理系統，使服務可規模化。',
+                        tasks: [
+                            '設計新人培訓與服務標準化 SOP',
+                            '建立即使創辦人不在場也能順暢運作的機制',
+                            '打造具有高度安全感與信任感的品牌（初伴）',
+                            '引進 AI 與數位工具提升營運效率'
+                        ]
+                    },
+                    'I': {
+                        phase: 'Stage 5',
+                        tabTitle: 'B＋I 終極投資',
+                        timeframe: '10年後',
+                        title: '第五階段：B＋I｜投資金融、企業與人才資產',
+                        focus: '換取最大選擇自由',
+                        desc: '建立即使不在現場也能持續運作的系統，並將產生的資本投入優質資產與人才培育。',
+                        capitalFocus: '三類資產配置：1.金融資產(股票/ETF) 2.企業資產(品牌/現金流) 3.人才資產(培育團隊/投資未來管理者)',
+                        tasks: [
+                            '賦能團隊管理者，實現完全授權營運',
+                            '將系統產生的資本投入具長期價值的資產',
+                            '輔導與投資有上進心的後進人才與團隊',
+                            '獲得時間與財務的全方位自由'
+                        ]
+                    }
+                },
+
+                // Future 6 major industries
+                futureIndustries: {
+                    'learning': {
+                        name: '人才培育與終身學習',
+                        title: '1. 人才培育與終身學習 (L&D)',
+                        stars: '★★★★★',
+                        why: '少子化與高齡化使單人產值更重要，加上AI衝擊，勞工需多次重新學習與轉職，終身學習成為剛需。',
+                        currentRoles: ['教育訓練專員', '企業內訓專員', 'HR Development', '培訓顧問'],
+                        emergingRoles: ['AI Workforce Reskilling Manager', 'Human-AI Collaboration Trainer', 'AI導入培訓顧問', '企業技能轉型顧問'],
+                        fitNote: '發揮你「讓人安心成長、陪伴解決問題」的培育型天賦。'
+                    },
+                    'childcare': {
+                        name: '托育、兒童與家庭支持',
+                        title: '2. 托育、兒童發展與家庭支持',
+                        stars: '★★★★★',
+                        why: '兒童人口減少但單孩投注資源大幅上升，市場從「量」走向「少量×高品質×高信任×家庭支持」。',
+                        currentRoles: ['托育人員 / 主管', '兒童活動企劃', '親職教育講師', '家庭服務專員'],
+                        emergingRoles: ['Parent Success Manager', 'Family Experience Manager', '家庭支持服務設計師', '智慧托育服務營運經理'],
+                        fitNote: '直接承接你的「初伴」品牌願景：陪伴孩子安心成長，陪伴家庭安心前行。'
+                    },
+                    'cs': {
+                        name: '客戶成功 (CSM)',
+                        title: '3. 客戶成功與長期關係管理',
+                        stars: '★★★★★',
+                        why: '訂閱制與SaaS普及，企業不再只需要賣產品的人，更需要讓客戶持續滿意、成功留存的夥伴。',
+                        currentRoles: ['Customer Success Specialist', 'Account Manager', '客戶服務主管'],
+                        emergingRoles: ['AI Customer Success Manager', 'Customer Journey Architect', 'AI導入成功顧問', '客戶採用策略師'],
+                        fitNote: '傾聽客戶需求 → 發現痛點 → 協調內部資源 → 建立長遠信任。'
+                    },
+                    'ops': {
+                        name: '營運改善與服務管理',
+                        title: '4. 營運改善與服務管理',
+                        stars: '★★★★★',
+                        why: 'AI取代重複性點狀工作後，最欠缺能將「人、工具、流程」有效整合、消除卡點的管理者。',
+                        currentRoles: ['營運專員 / 管理師', '專案管理師 (PM)', '流程改善專員', '品質管理'],
+                        emergingRoles: ['AI Operations Manager', 'Human-AI Workflow Designer', '數位流程轉型專家', 'AI Governance Ops Manager'],
+                        fitNote: '將你「發現混亂 → 主動補位 → 建立SOP → 恢復秩序」的能力極致發揮。'
+                    },
+                    'senior': {
+                        name: '高齡照護與跨世代服務',
+                        title: '5. 高齡照護與跨世代服務',
+                        stars: '★★★★☆',
+                        why: '超高齡社會來臨，高齡者對於安心生活、跨世代交流與科技適應的需求急遽爆發。',
+                        currentRoles: ['長照服務管理', '照顧管理專員', '高齡活動企劃', '醫療行政'],
+                        emergingRoles: ['Ageing Experience Designer', 'Longevity Service Manager', '智慧照護營運經理', '高齡科技導入顧問'],
+                        fitNote: '從服務設計與體驗營運出發，打造讓人尊嚴安心的高齡服務系統。'
+                    },
+                    'translator': {
+                        name: '人與 AI 轉譯者',
+                        title: '6. 人與 AI 之間的「轉譯者」',
+                        stars: '★★★★★',
+                        why: '企業買了AI卻沒人會用，急需能理解業務問題、協助員工消除恐懼並轉型工作習慣的橋樑。',
+                        currentRoles: ['專案協調員', '變革管理專員', '軟體培訓師'],
+                        emergingRoles: ['AI Adoption Specialist', 'AI Change Management Manager', 'Human-AI Collaboration Designer', 'AI Literacy Trainer'],
+                        fitNote: '發揮你的溫暖與同理心，讓人「安心地適應新技術與新改變」。'
+                    }
+                },
+
+                // Priority routes details
+                priorityRoutes: [
+                    {
+                        title: '路線 1：AI 時代的人才培育與組織發展',
+                        badge: '首選推薦',
+                        path: '教育訓練專員 → L&D Specialist → 人才發展經理 → AI轉型培訓顧問',
+                        role: '讓人適應變化、提升能力、持續成長的人。',
+                        summary: '最能直接發揮你「育人」的天賦，並搭上企業 AI 轉型的強勁風口。'
+                    },
+                    {
+                        title: '路線 2：教育／托育 × 家庭服務營運 (「初伴」品牌)',
+                        badge: '終極願景',
+                        path: '托育/教育工作者 → 活動與家長溝通 → 中心營運 → 家庭服務品牌創辦',
+                        role: '建立讓孩子、家長與團隊都安心的服務系統。',
+                        summary: '實現你深層的初衷，將「照顧人」轉化為「可規模化營運的安心系統」。'
+                    },
+                    {
+                        title: '路線 3：Customer Success (客戶成功) × AI 科技',
+                        badge: '高薪潛力',
+                        path: 'CS Specialist → Customer Success Manager → AI解決方案導入顧問',
+                        role: '把複雜的產品與流程，轉化成客戶真正能使用的價值。',
+                        summary: '結合傾聽、協調與客戶關懷，在科技產業中建立不可替代的信任壁壘。'
+                    },
+                    {
+                        title: '路線 4：營運改善 × 專案管理 (Ops & PM)',
+                        badge: '通用底座',
+                        path: '營運專員 → 專案管理師 (PM) → 跨部門專案經理 → 營運策略主管',
+                        role: '把混亂變成秩序，把問題轉化為可持續的流程。',
+                        summary: '任何組織都極度需要的定海神針，讓你跨產業無縫轉移能力。'
+                    },
+                    {
+                        title: '路線 5：高齡照護 × 智慧服務營運',
+                        badge: '藍海市場',
+                        path: '社福/照護服務 → 照護營運 → 智慧照護導入 → 高齡服務設計創辦',
+                        role: '把科技、服務與高齡者的真實需求溫暖整合起來。',
+                        summary: '順應台灣超高齡化趨勢，運用你的整合力填補科技與長者之間的鴻溝。'
+                    }
+                ],
+
+                // Environment Compass Checklist
+                envChecklist: [
+                    { title: '1. 團隊成長意願與上進心', desc: '主管與團隊是否積極接受流程改善，且團隊成員具有上進心與改進誠意？', checked: true },
+                    { title: '2. 三維度能力累積 (人×系統×未來AI)', desc: '這份工作能否讓你同時鍛鍊「與人溝通」、「與系統/SOP營運」以及「與未來AI/數位工具」合作的能力？', checked: true },
+                    { title: '3. 權責與認可平衡', desc: '組織是否能看見預防問題發生、無形流程優化的價值，而非把你的主動補位當成理所當然？', checked: true },
+                    { title: '4. 完整培訓與成長路徑', desc: '是否有清晰的新人培育機制、合理的升遷/轉職通道，以及開放學習試錯的文化？', checked: true },
+                    { title: '5. 留下可持續的改變', desc: '你所解決的問題與優化的 SOP，是否能被組織保存下來，形成長期可持續的效益？', checked: true }
+                ],
+
+                get checkedCount() {
+                    return this.envChecklist.filter(item => item.checked).length;
+                },
+
+                getScoreTitle() {
+                    const count = this.checkedCount;
+                    if (count >= 4) return '🌟 黃金高適配土壤';
+                    if (count >= 2) return '⚠️ 觀望 / 跳板型環境';
+                    return '🚨 高危消耗型陷阱';
+                },
+
+                getScoreDesc() {
+                    const count = this.checkedCount;
+                    if (count >= 4) return '極度值得投入！這是一個能讓你的整合天賦生根發芽、持續積累四類資產的健全環境。';
+                    if (count >= 2) return '適合做為短期學習技能的跳板，但需時刻保持邊界感，避免過度無底限補位導致倦怠。';
+                    if (count < 2) return '警告：此環境極易落入「責任與認可失衡」的倦怠循環，不值得你長期投入天賦，請規劃轉場。';
+                },
+
+                printSummary() {
+                    window.print();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
